@@ -1,11 +1,10 @@
 --Query showing number of players under the Age of 24 on each team 
-
 SELECT TEAM, COUNT([FULL NAME]) AS '# Of players under the age of 24'
 FROM [NBA PROJECT]..['Season2020-2021$']
 WHERE AGE <= 24
 GROUP BY TEAM;
---Query showing average age of players with at least 20 minutes played per game
 
+--Query showing average age of players with at least 20 minutes played per game
 SELECT TEAM, ROUND(AVG(['Season2020-2021$'].AGE),2)
 FROM [NBA PROJECT]..['Season2020-2021$']
 WHERE MPG >= 20
@@ -13,7 +12,6 @@ GROUP BY TEAM
 ORDER BY ROUND(AVG(['Season2020-2021$'].AGE),2) ASC;
 
 -- Query showing the Percentage change of Points Per Game from '19-20' Season to '20-21' Season
-
 SELECT S21.[FULL NAME],
 S21.TEAM,
 S21.AGE,
@@ -30,7 +28,6 @@ WHERE S21.AGE < 23 AND S21.[PPGPointsPoints per game#] > 12
 ORDER BY VI_PC DESC;
 
 -- Query showing top scorer on each team under the age of 24
-
 WITH previous_query AS ( 
 	SELECT S21.TEAM, 
 	ROUND(MAX(S21.[PPGPointsPoints per game#]),2) AS HIGEST_PLAYER_AVG
@@ -45,7 +42,6 @@ AND previous_query.HIGEST_PLAYER_AVG = ['Season2020-2021$'].[PPGPointsPoints per
 
 
 -- Query Showing top NBA Scorer PPG 
-
 SELECT TEAM, [FULL NAME], [PPGPointsPoints per game#], AGE
 FROM [NBA PROJECT]..['Season2020-2021$']
 WHERE [PPGPointsPoints per game#] = (
