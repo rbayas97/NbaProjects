@@ -4,7 +4,7 @@ FROM [NBA PROJECT]..['Season2020-2021$']
 WHERE AGE <= 24
 GROUP BY TEAM;
 
---Query showing average age of players with at least 20 minutes played per game
+--Query showing the team average age of players with at least 20 minutes played per game
 SELECT TEAM, ROUND(AVG(['Season2020-2021$'].AGE),2)
 FROM [NBA PROJECT]..['Season2020-2021$']
 WHERE MPG >= 20
@@ -46,3 +46,4 @@ SELECT TEAM, [FULL NAME], [PPGPointsPoints per game#], AGE
 FROM [NBA PROJECT]..['Season2020-2021$']
 WHERE [PPGPointsPoints per game#] = (
 	SELECT MAX([NBA PROJECT]..['Season2020-2021$'].[PPGPointsPoints per game#]);
+	
