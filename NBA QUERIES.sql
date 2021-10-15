@@ -40,10 +40,12 @@ JOIN previous_query
 ON previous_query.TEAM = [NBA PROJECT]..['Season2020-2021$'].TEAM
 AND previous_query.HIGEST_PLAYER_AVG = ['Season2020-2021$'].[PPGPointsPoints per game#];
 
-
 -- Query Showing top NBA Scorer PPG 
 SELECT TEAM, [FULL NAME], [PPGPointsPoints per game#], AGE
 FROM [NBA PROJECT]..['Season2020-2021$']
 WHERE [PPGPointsPoints per game#] = (
 	SELECT MAX([NBA PROJECT]..['Season2020-2021$'].[PPGPointsPoints per game#]);
+	
+	
+	
 	
