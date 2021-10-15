@@ -4,12 +4,14 @@ FROM [NBA PROJECT]..['Season2020-2021$']
 WHERE AGE <= 24
 GROUP BY TEAM;
 
+
 --Query showing the team average age of players with at least 20 minutes played per game
 SELECT TEAM, ROUND(AVG(['Season2020-2021$'].AGE),2)
 FROM [NBA PROJECT]..['Season2020-2021$']
 WHERE MPG >= 20
 GROUP BY TEAM
 ORDER BY ROUND(AVG(['Season2020-2021$'].AGE),2) ASC;
+
 
 -- Query showing the Percentage change of Points Per Game from '19-20' Season to '20-21' Season
 SELECT S21.[FULL NAME],
@@ -26,6 +28,7 @@ LEFT JOIN [NBA PROJECT]..['Season2019-2020$'] S20
 	ON S21.[FULL NAME] = S20.[FULL NAME]
 WHERE S21.AGE < 23 AND S21.[PPGPointsPoints per game#] > 12
 ORDER BY VI_PC DESC;
+
 
 -- Query showing top scorer on each team under the age of 24
 WITH previous_query AS ( 
