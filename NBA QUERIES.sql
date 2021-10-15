@@ -13,7 +13,7 @@ GROUP BY TEAM
 ORDER BY ROUND(AVG(['Season2020-2021$'].AGE),2) ASC;
 
 
--- Query showing the Percentage change of Points Per Game from '19-20' Season to '20-21' Season
+-- Query showing the Percentage change of Points Per Game and Versatility Index from '19-20' Season to '20-21' Season 
 SELECT S21.[FULL NAME],
 S21.TEAM,
 S21.AGE,
