@@ -1,0 +1,58 @@
+from bs4 import BeautifulSoup
+import requests
+from csv import writer 
+
+#Getting data from NBA draft Years (2000-2021), and putting into CSV File
+#Data from basketball-reference.com
+
+def nba_webscraper(url):
+    page = requests.get(url)
+    draft_data = BeautifulSoup(page.content, 'html.parser')
+    tbody = draft_data.find("tbody")
+    player_rows = tbody.find_all('tr')
+    draft = draft_data.find('div', id="info")
+    
+  
+    for player in player_rows:
+        info = player.find_all('td', class_="left")
+        draft_round = player.find_all('td', class_="right")
+        draft_year = draft.find('h1',itemprop="name").text.replace('\n',"")
+        if len(info) > 0:
+            player_pick = draft_round[0].find('a').text
+            player_team = info[0].find('a')['title']
+            player_name = info[1].find('a').text
+            draft_info=[draft_year, player_pick, player_team, player_name]
+            print(draft_info)
+            thewriter.writerow(draft_info)
+            
+urls = ["https://www.basketball-reference.com/draft/NBA_2021.html",
+"https://www.basketball-reference.com/draft/NBA_2020.html",
+"https://www.basketball-reference.com/draft/NBA_2019.html",
+"https://www.basketball-reference.com/draft/NBA_2018.html",
+"https://www.basketball-reference.com/draft/NBA_2017.html",
+"https://www.basketball-reference.com/draft/NBA_2016.html",
+"https://www.basketball-reference.com/draft/NBA_2015.html",
+"https://www.basketball-reference.com/draft/NBA_2014.html",
+"https://www.basketball-reference.com/draft/NBA_2013.html",
+"https://www.basketball-reference.com/draft/NBA_2012.html",
+"https://www.basketball-reference.com/draft/NBA_2011.html",
+"https://www.basketball-reference.com/draft/NBA_2010.html",
+"https://www.basketball-reference.com/draft/NBA_2009.html",
+"https://www.basketball-reference.com/draft/NBA_2008.html",
+"https://www.basketball-reference.com/draft/NBA_2007.html",
+"https://www.basketball-reference.com/draft/NBA_2006.html",
+"https://www.basketball-reference.com/draft/NBA_2005.html",
+"https://www.basketball-reference.com/draft/NBA_2004.html",
+"https://www.basketball-reference.com/draft/NBA_2003.html",
+"https://www.basketball-reference.com/draft/NBA_2002.html",
+"https://www.basketball-reference.com/draft/NBA_2001.html",
+"https://www.basketball-reference.com/draft/NBA_2000.html"]
+
+
+with open('NbaDraftYears.csv', 'a', encoding= 'utf8', newline='') as f:
+    thewriter = writer(f)
+    header = ['Year', 'Pick', 'Team', 'Player']
+    thewriter.writerow(header)
+    for url in urls:
+        nba_webscraper(url)
+            
