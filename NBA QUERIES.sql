@@ -50,6 +50,16 @@ FROM [NBA PROJECT]..['Season2020-2021$']
 WHERE [PPGPointsPoints per game#] = (
 	SELECT MAX([NBA PROJECT]..['Season2020-2021$'].[PPGPointsPoints per game#]);
 	
+
+--Query showing how many players in starting lineup are "Top 5" picks from their Draft
+--This info was gathered in tables created from webscraping data using python
+SELECT ['2021_Nba_Teams$'].Team, COUNT(NbaDraftYears$.Pick) as "# of 'Top 5 picks' on Starting Squad"
+FROM [NBA PROJECT]..['2021_Nba_Teams$']
+LEFT JOIN NbaDraftYears$
+ON ['2021_Nba_Teams$'].Player=NbaDraftYears$.Player
+WHERE NbaDraftYears$.Pick <= 5
+GROUP BY ['2021_Nba_Teams$'].Team
+	
 	
 	
 	
