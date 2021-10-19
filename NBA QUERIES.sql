@@ -53,20 +53,19 @@ WHERE [PPGPointsPoints per game#] = (
 
 --Query showing how many players in starting lineup are "Top 5" picks from their Draft
 --This info was gathered in tables created from webscraping data using python
-SELECT ['2021_Nba_Teams$'].Team, COUNT(NbaDraftYears$.Pick) as "# of 'Top 5 picks' on Starting Squad"
+SELECT ['2021_Nba_Teams$'].Team, COUNT(NbaDraftYears$.Pick) AS "# of 'Top 5 picks' in Starting Lineup" 
 FROM [NBA PROJECT]..['2021_Nba_Teams$']
-LEFT JOIN NbaDraftYears$
+JOIN [NBA PROJECT]..NbaDraftYears$
 ON ['2021_Nba_Teams$'].Player=NbaDraftYears$.Player
 WHERE NbaDraftYears$.Pick <= 5
 GROUP BY ['2021_Nba_Teams$'].Team;
 	
-	
 --Query showing how many first rounders are in the starting lineup for each NBA Team 
-SELECT ['2021_Nba_Teams$'].Team, COUNT(NbaDraftYears$.Round) as "# of 'First Rounders' on Starting Squad"
+SELECT ['2021_Nba_Teams$'].Team, COUNT(NbaDraftYears$.DR_Round) AS "# of 'First Rounders' in Starting Lineup" 
 FROM [NBA PROJECT]..['2021_Nba_Teams$']
-LEFT JOIN NbaDraftYears$
+JOIN [NBA PROJECT]..NbaDraftYears$
 ON ['2021_Nba_Teams$'].Player=NbaDraftYears$.Player
-WHERE NbaDraftYears$.Round = 1
+WHERE NbaDraftYears$.DR_Round = 1
 GROUP BY ['2021_Nba_Teams$'].Team;
 	
 	
