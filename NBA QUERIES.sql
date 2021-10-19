@@ -58,8 +58,15 @@ FROM [NBA PROJECT]..['2021_Nba_Teams$']
 LEFT JOIN NbaDraftYears$
 ON ['2021_Nba_Teams$'].Player=NbaDraftYears$.Player
 WHERE NbaDraftYears$.Pick <= 5
-GROUP BY ['2021_Nba_Teams$'].Team
+GROUP BY ['2021_Nba_Teams$'].Team;
 	
 	
+--Query showing how many first rounders are in the starting lineup for each NBA Team 
+SELECT ['2021_Nba_Teams$'].Team, COUNT(NbaDraftYears$.Round) as "# of 'First Rounders' on Starting Squad"
+FROM [NBA PROJECT]..['2021_Nba_Teams$']
+LEFT JOIN NbaDraftYears$
+ON ['2021_Nba_Teams$'].Player=NbaDraftYears$.Player
+WHERE NbaDraftYears$.Round = 1
+GROUP BY ['2021_Nba_Teams$'].Team;
 	
 	
